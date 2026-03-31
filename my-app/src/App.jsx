@@ -12,14 +12,13 @@ function App() {
   const [message, setMessage] = useState("");
   const [editingProduct, setEditingProduct] = useState(null);
   const [productToDelete, setProductToDelete] = useState(null);
-
   const [search, setSearch] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState("");
 
   const [formData, setFormData] = useState({
     name: "",
     price: "",
-    category: "",
+    description: "",
+    image: "",
   });
 
   useEffect(() => {
@@ -37,19 +36,25 @@ function App() {
           id: 1,
           name: "Ração Premium",
           price: "89.90",
-          category: "Alimentação",
+          description: "Ração balanceada para cães adultos de pequeno porte.",
+          image:
+            "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=800&q=80",
         },
         {
           id: 2,
           name: "Brinquedo Mordedor",
           price: "24.90",
-          category: "Brinquedos",
+          description: "Brinquedo resistente para entretenimento e alívio do estresse do pet.",
+          image:
+            "https://images.unsplash.com/photo-1560743641-3914f2c45636?auto=format&fit=crop&w=800&q=80",
         },
         {
           id: 3,
           name: "Caminha Pet",
           price: "129.90",
-          category: "Acessórios",
+          description: "Caminha confortável e macia para descanso diário.",
+          image:
+            "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80",
         },
       ];
 
@@ -85,7 +90,8 @@ function App() {
     setFormData({
       name: "",
       price: "",
-      category: "",
+      description: "",
+      image: "",
     });
     setEditingProduct(null);
   }
@@ -94,11 +100,12 @@ function App() {
     event.preventDefault();
 
     const name = formData.name.trim();
-    const category = formData.category.trim();
+    const description = formData.description.trim();
     const price = Number(formData.price);
+    const image = formData.image.trim();
 
-    if (!name || !category || !formData.price) {
-      showTemporaryMessage("Preencha todos os campos.");
+    if (!name || !formData.price || !description) {
+      showTemporaryMessage("Preencha nome, preço e descrição.");
       return;
     }
 
@@ -107,16 +114,20 @@ function App() {
       return;
     }
 
+    const productData = {
+      name,
+      price: price.toFixed(2),
+      description,
+      image:
+        image ||
+        "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=800&q=80",
+    };
+
     if (editingProduct) {
       setProducts((prevProducts) =>
         prevProducts.map((product) =>
           product.id === editingProduct.id
-            ? {
-                ...product,
-                name,
-                price: price.toFixed(2),
-                category,
-              }
+            ? { ...product, ...productData }
             : product
         )
       );
@@ -128,9 +139,7 @@ function App() {
 
     const newProduct = {
       id: Date.now(),
-      name,
-      price: price.toFixed(2),
-      category,
+      ...productData,
     };
 
     setProducts((prevProducts) => [...prevProducts, newProduct]);
@@ -143,7 +152,8 @@ function App() {
     setFormData({
       name: product.name,
       price: product.price,
-      category: product.category,
+      description: product.description,
+      image: product.image,
     });
   }
 
@@ -158,16 +168,11 @@ function App() {
       prevProducts.filter((product) => product.id !== productToDelete.id)
     );
 
-    setProductToDelete(null);
-
-    if (
-      editingProduct &&
-      productToDelete &&
-      editingProduct.id === productToDelete.id
-    ) {
+    if (editingProduct && editingProduct.id === productToDelete.id) {
       resetForm();
     }
 
+    setProductToDelete(null);
     showTemporaryMessage("Produto removido com sucesso.");
   }
 
@@ -175,20 +180,11 @@ function App() {
     setProductToDelete(null);
   }
 
-  const categories = useMemo(() => {
-    const uniqueCategories = [...new Set(products.map((p) => p.category))];
-    return uniqueCategories.sort((a, b) => a.localeCompare(b));
-  }, [products]);
-
   const filteredProducts = useMemo(() => {
-    return products
-      .filter((product) =>
-        product.name.toLowerCase().includes(search.toLowerCase())
-      )
-      .filter((product) =>
-        categoryFilter ? product.category === categoryFilter : true
-      );
-  }, [products, search, categoryFilter]);
+    return products.filter((product) =>
+      product.name.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [products, search]);
 
   return (
     <div className="app">
@@ -216,20 +212,6 @@ function App() {
             value={search}
             onChange={(event) => setSearch(event.target.value)}
           />
-
-          <select
-            className="category-select"
-            value={categoryFilter}
-            onChange={(event) => setCategoryFilter(event.target.value)}
-          >
-            <option value="">Todas as categorias</option>
-
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
         </div>
 
         {loading ? (

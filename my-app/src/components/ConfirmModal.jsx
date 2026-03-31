@@ -8,11 +8,19 @@ function ConfirmModal({ productName, onConfirm, onCancel }) {
         </p>
 
         <div className="modal-actions">
-          <button className="secondary-button" onClick={onCancel}>
+          <button
+            type="button"
+            className="modal-button secondary-button"
+            onClick={onCancel}
+          >
             Cancelar
           </button>
 
-          <button className="delete-button" onClick={onConfirm}>
+          <button
+            type="button"
+            className="modal-button modal-delete-button"
+            onClick={onConfirm}
+          >
             Confirmar
           </button>
         </div>

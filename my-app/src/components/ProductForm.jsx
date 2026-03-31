@@ -33,14 +33,26 @@ function ProductForm({
         />
       </div>
 
-      <div className="form-group">
-        <label htmlFor="category">Categoria</label>
+      <div className="form-group form-group-full">
+        <label htmlFor="description">Descrição</label>
+        <textarea
+          id="description"
+          name="description"
+          placeholder="Descreva o produto"
+          value={formData.description}
+          onChange={onChange}
+          rows="4"
+        ></textarea>
+      </div>
+
+      <div className="form-group form-group-full">
+        <label htmlFor="image">URL da imagem (opcional)</label>
         <input
-          id="category"
+          id="image"
           type="text"
-          name="category"
-          placeholder="Ex: Periféricos"
-          value={formData.category}
+          name="image"
+          placeholder="https://..."
+          value={formData.image}
           onChange={onChange}
         />
       </div>

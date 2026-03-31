@@ -5,57 +5,49 @@
 ![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
 ![Deploy](https://img.shields.io/badge/deploy-vercel-black?logo=vercel)
 
-Aplicação desenvolvida em **React + Vite**, com foco em consolidação de conceitos fundamentais como **useState, useEffect, props e componentização**, evoluindo para um projeto com comportamento próximo a aplicações reais.
-
----
+Aplicação desenvolvida em **React + Vite** com foco em prática de **useState**, **useEffect**, **props** e **componentização**, evoluindo para um projeto com interações mais próximas de uma aplicação real.
 
 ## ✨ Funcionalidades
 
 * 📦 Cadastro de produtos
 * ✏️ Edição de produtos
-* ❌ Remoção com confirmação (modal)
+* ❌ Remoção com confirmação em modal
 * 🔍 Busca por nome
-* 🏷️ Filtro por categoria
-* 💾 Persistência com localStorage
-* ⏳ Simulação de carregamento (useEffect + setTimeout)
+* 💾 Persistência com `localStorage`
+* ⏳ Simulação de carregamento com `useEffect` + `setTimeout`
 * 💬 Feedback visual ao usuário
-* 💰 Formatação de moeda (R$)
-
----
+* 💰 Formatação de preço em real
+* 🖼️ Exibição de imagem do produto
 
 ## 🧠 Conceitos aplicados
 
-### 🔹 useState
+### `useState`
 
 Gerenciamento de:
 
-* Lista de produtos
-* Dados do formulário
-* Estado de edição
-* Filtros
-* Mensagens
-* Modal
+* lista de produtos
+* dados do formulário
+* estado de edição
+* busca
+* mensagem de feedback
+* modal de confirmação
 
----
+### `useEffect`
 
-### 🔹 useEffect
+Utilizado para:
 
-* Simulação de carregamento inicial
-* Persistência automática no localStorage
+* simular o carregamento inicial dos produtos
+* salvar automaticamente a lista no `localStorage`
 
----
-
-### 🔹 Props
+### `props`
 
 Comunicação entre componentes:
 
-* Envio de dados e funções do componente principal (`App`) para os filhos
+* envio de dados e funções do `App` para os componentes filhos
 
----
+### Componentização
 
-### 🔹 Componentização
-
-```id="tree1"
+```text
 App
 │
 ├── ProductForm
@@ -66,10 +58,6 @@ App
 └── ConfirmModal
 ```
 
-Separação clara de responsabilidades, facilitando manutenção e reutilização.
-
----
-
 ## 🛠️ Tecnologias utilizadas
 
 * React
@@ -77,11 +65,9 @@ Separação clara de responsabilidades, facilitando manutenção e reutilizaçã
 * JavaScript (ES6+)
 * CSS3
 
----
-
 ## 📁 Estrutura do projeto
 
-```id="tree2"
+```text
 src/
   components/
     ProductForm.jsx
@@ -95,75 +81,63 @@ src/
   main.jsx
 ```
 
----
-
 ## ▶️ Como executar o projeto
 
-```bash id="cmd1"
-# Clonar o repositório
+```bash
 git clone https://github.com/seu-usuario/seu-repo.git
-
-# Entrar na pasta
 cd seu-repo
-
-# Instalar dependências
 npm install
-
-# Rodar o projeto
 npm run dev
 ```
 
-Acesse:
+Acesse no navegador:
 
-```id="cmd2"
+```text
 http://localhost:5173
 ```
 
----
-
 ## 🎯 Objetivo do projeto
 
-Este projeto foi desenvolvido com o objetivo de evoluir de um CRUD simples para uma aplicação com:
+Este projeto foi desenvolvido para consolidar fundamentos do React por meio de uma aplicação de cadastro de produtos com campos obrigatórios de:
 
-* Estado mais complexo
-* Interações reais de usuário
-* Organização profissional
-* Simulação de fluxo de aplicação real
+* nome
+* preço
+* descrição
 
----
+Além disso, o componente `ProductCard` recebe via props:
+
+* `name`
+* `price`
+* `image`
+* `description`
 
 ## 🚀 Diferenciais implementados
 
-* Persistência de dados sem backend (localStorage)
-* UX melhorada com modal de confirmação
-* Filtros combinados (busca + categoria)
-* Edição dinâmica reutilizando o formulário
-* Código modular e reutilizável
-
----
+* persistência no navegador sem backend
+* edição reutilizando o mesmo formulário
+* confirmação antes da remoção
+* interface mais próxima de um CRUD real
+* código modular e reutilizável
 
 ## 🔮 Próximas melhorias
 
-* Integração com API real
-* Context API ou Redux
-* Autenticação de usuário
-* Testes automatizados
-* UI com Tailwind ou Material UI
-
----
+* integração com API real
+* filtros mais avançados
+* autenticação
+* testes automatizados
+* deploy final em produção
 
 ## 👨‍💻 Autor
 
 **Felipe Gabriel Lambiazzi**
 
-* 💼 Em transição para desenvolvimento de software
-* 🚀 Focado em Frontend (React / Angular)
-* 📚 Estudando Backend e arquitetura
+* Em transição para desenvolvimento de software
+* Focado em Frontend
+* Estudando React, Angular e Backend
 
-🔗 LinkedIn: https://www.linkedin.com/in/felipe-gabriel-lambiazzi-734861140/
-
----
+LinkedIn:
+https://www.linkedin.com/in/felipe-gabriel-lambiazzi-734861140/
 
 ## 📌 Considerações finais
 
-Projeto desenvolvido para demonstrar domínio prático de conceitos essenciais do React, com foco em clareza, organização e evolução progressiva da complexidade da aplicação.
+Projeto desenvolvido para demonstrar domínio prático de conceitos essenciais do React, com foco em organização, reutilização de componentes e evolução progressiva da complexidade da aplicação.
